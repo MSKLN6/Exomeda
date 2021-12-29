@@ -48,11 +48,11 @@ public class Player {
     }
     
     public void beweegLinks(){
-        positieX--;
+        positieX = positieX - 10;
     }
     
     public void beweegRechts(){
-        positieX++;
+        positieX = positieX + 10;
     }
     
     public void reset(){
