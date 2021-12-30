@@ -23,7 +23,7 @@ public class Player {
      */
     public Player(double positieX, double positieY) {
         this.positieX = positieX;
-        this.positieY = 50;
+        this.positieY = 500;
     }
 
     /**
