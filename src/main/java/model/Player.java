@@ -19,7 +19,7 @@ public class Player {
     /**
      * 
      * @param positieX variabele waarde X positie
-     * @param positieY vaste waarde 50
+     * @param positieY vaste waarde 500
      */
     public Player(double positieX, double positieY) {
         this.positieX = positieX;
@@ -48,11 +48,11 @@ public class Player {
     }
     
     public void beweegLinks(){
-        positieX -= 10;
+        positieX -= 30;
     }
     
     public void beweegRechts(){
-        positieX += 10;
+        positieX += 30;
     }
     
     public void reset(){

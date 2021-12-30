@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Player;
+import model.Projectile;
 import view.PlayerView;
+import view.ProjectileView;
 
 public class ExomedaFXMLController {
 
@@ -22,34 +24,46 @@ public class ExomedaFXMLController {
     @FXML
     private AnchorPane spelView;
     
-    private Player model;
-    private PlayerView view;
+    private Player playerModel;
+    private Projectile projectileModel;
+    private PlayerView playerView;
+    private ProjectileView projectileView;
     
     @FXML
     void initialize() {
-        model = new Player();
-        view = new PlayerView(model);
-        playerSchip.getChildren().addAll(view);
+        playerModel = new Player();
+        playerView = new PlayerView(playerModel);
+        playerSchip.getChildren().addAll(playerView);
+        
+        projectileModel = new Projectile();
+        projectileView = new ProjectileView(projectileModel);
+        playerSchip.getChildren().addAll(projectileView);
         
         playerSchip.setOnKeyPressed(this::beweegPlayer);
         
-        view.setFocusTraversable(true);
+        projectileView.setFocusTraversable(true);
+        playerView.setFocusTraversable(true);
     }
 
     private void beweegPlayer(KeyEvent t) {
         switch(t.getCode()){
             case RIGHT:
-                model.beweegRechts();
+                playerModel.beweegRechts();
                 break;
             case LEFT:
-                model.beweegLinks();
+                playerModel.beweegLinks();
+                break;
+            case SPACE:
+                projectileModel.schiet();
                 break;
         }
         update();
     }
+    
 
     private void update() {
-        view.update();
+        playerView.update();
+        projectileView.update();
     }
 
 }
