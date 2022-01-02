@@ -39,13 +39,14 @@ public class ProjectileView extends Region {
         projectile.getPoints().add(20.0);
         projectile.getPoints().add(10.0);
         projectile.getPoints().add(10.0);
-        projectile.setFill(Color.BLUE);
+        
+        projectile.setFill(Color.WHITE);
         
     }
     
     public void update(){
         getChildren().removeAll();
-        projectilePane.setTranslateX(model.getPositieX());
+        projectilePane.setTranslateX(model.getPositieY());
         getChildren().addAll(projectilePane);
     }
 

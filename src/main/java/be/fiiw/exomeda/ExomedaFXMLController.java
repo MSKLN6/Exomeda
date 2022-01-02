@@ -25,8 +25,8 @@ public class ExomedaFXMLController {
     private AnchorPane spelView;
     
     private Player playerModel;
-    private Projectile projectileModel;
     private PlayerView playerView;
+    private Projectile projectileModel;
     private ProjectileView projectileView;
     
     @FXML
@@ -41,8 +41,8 @@ public class ExomedaFXMLController {
         
         playerSchip.setOnKeyPressed(this::beweegPlayer);
         
-        projectileView.setFocusTraversable(true);
         playerView.setFocusTraversable(true);
+        projectileView.setFocusTraversable(true);
     }
 
     private void beweegPlayer(KeyEvent t) {
@@ -53,7 +53,7 @@ public class ExomedaFXMLController {
             case LEFT:
                 playerModel.beweegLinks();
                 break;
-            case SPACE:
+            case UP:
                 projectileModel.schiet();
                 break;
         }
