@@ -11,9 +11,10 @@ package model;
 public class Player {
     private double positieX; // de variabele x positie
     public static double positieY; // De Y positie is een vaste waade
+    private PlayerBeweging beweging;
     
     public Player() {
-        this(400,50);
+        this(400,500,PlayerBeweging.STIL);
     }
     
     /**
@@ -21,9 +22,10 @@ public class Player {
      * @param positieX variabele waarde X positie
      * @param positieY vaste waarde 500
      */
-    public Player(double positieX, double positieY) {
+    public Player(double positieX, double positieY, PlayerBeweging beweging) {
         this.positieX = positieX;
         this.positieY = 500;
+        this.beweging = beweging;
     }
 
     /**
@@ -39,6 +41,10 @@ public class Player {
     public void setPositieX(double positieX) {
         this.positieX = positieX;
     }
+    
+    public void setBeweging(PlayerBeweging beweging){
+        this.beweging = beweging;
+    }
 
     /**
      * @return the positieY
@@ -48,15 +54,29 @@ public class Player {
     }
     
     public void beweegLinks(){
-        positieX -= 30;
+        positieX--;
     }
     
     public void beweegRechts(){
-        positieX += 30;
+        positieX++;
     }
     
     public void reset(){
         positieX = 400;
-        positieY = 50;
+        positieY = 500;
+        beweging = PlayerBeweging.STIL;
+    }
+    
+    public void tick(){
+        switch(beweging){
+            case STIL:
+                break;
+            case LINKS:
+                beweegLinks();
+                break;
+            case RECHTS:
+                beweegRechts();
+                break;
+        }
     }
 }

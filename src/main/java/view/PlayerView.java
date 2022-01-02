@@ -15,11 +15,11 @@ import model.Player;
  * @author ramonvd
  */
 public class PlayerView extends Region {
-    private Player model;
+    private Player playerModel;
     private AnchorPane playerSchip;
 
     public PlayerView(Player model) {
-        this.model = model;
+        this.playerModel = model;
         tekenPlayer();
         update();
     }
@@ -29,7 +29,7 @@ public class PlayerView extends Region {
         Polygon schip = new Polygon();
 
         schip.setLayoutX(5);
-        schip.setLayoutY(model.getPositieY());
+        schip.setLayoutY(playerModel.getPositieY());
         schip.getPoints().add(15.0);
         schip.getPoints().add(0.0);
         schip.getPoints().add(30.0);
@@ -42,8 +42,8 @@ public class PlayerView extends Region {
     }
     
     public void update(){
-        getChildren().removeAll();
-        playerSchip.setTranslateX(model.getPositieX());
+        getChildren().clear();
+        playerSchip.setTranslateX(this.playerModel.getPositieX());
         getChildren().addAll(playerSchip);
     }
 

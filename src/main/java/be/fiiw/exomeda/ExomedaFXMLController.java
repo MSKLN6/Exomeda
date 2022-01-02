@@ -2,10 +2,12 @@ package be.fiiw.exomeda;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Player;
+import model.PlayerBeweging;
 import model.Projectile;
 import view.PlayerView;
 import view.ProjectileView;
@@ -33,37 +35,54 @@ public class ExomedaFXMLController {
     void initialize() {
         playerModel = new Player();
         playerView = new PlayerView(playerModel);
+        
         playerSchip.getChildren().addAll(playerView);
+        update();
         
         projectileModel = new Projectile();
         projectileView = new ProjectileView(projectileModel);
         playerSchip.getChildren().addAll(projectileView);
         
         playerSchip.setOnKeyPressed(this::beweegPlayer);
+        playerSchip.setOnKeyReleased(this::stopBeweegPlayer);
+        
+        start();
         
         playerView.setFocusTraversable(true);
-        projectileView.setFocusTraversable(true);
     }
 
+    public void start(){
+        BeweegPlayer task = new BeweegPlayer(playerModel, this);
+        Timer t = new Timer(true);
+        t.scheduleAtFixedRate(task, 0, 2);
+    }
+    
+    public void update() {
+        playerView.update();
+    }
+
+    
     private void beweegPlayer(KeyEvent t) {
         switch(t.getCode()){
             case RIGHT:
-                playerModel.beweegRechts();
+                playerModel.setBeweging(PlayerBeweging.RECHTS);
                 break;
             case LEFT:
-                playerModel.beweegLinks();
-                break;
-            case UP:
-                projectileModel.schiet();
+                playerModel.setBeweging(PlayerBeweging.LINKS);
                 break;
         }
         update();
     }
     
-
-    private void update() {
-        playerView.update();
-        projectileView.update();
-    }
-
+    private void stopBeweegPlayer(KeyEvent t) {
+        switch(t.getCode()){
+            case RIGHT:
+                playerModel.setBeweging(PlayerBeweging.STIL);
+                break;
+            case LEFT:
+                playerModel.setBeweging(PlayerBeweging.STIL);
+                break;
+        }
+        update();
+    }    
 }
