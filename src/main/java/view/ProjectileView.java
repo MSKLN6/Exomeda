@@ -42,6 +42,7 @@ public class ProjectileView extends Region {
         
         projectile.setFill(Color.BLUE);
         
+        projectilePane.getChildren().addAll(projectile);
     }
     
     public void update(){

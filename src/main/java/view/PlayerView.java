@@ -30,6 +30,7 @@ public class PlayerView extends Region {
 
         schip.setLayoutX(5);
         schip.setLayoutY(playerModel.getPositieY());
+        
         schip.getPoints().add(15.0);
         schip.getPoints().add(0.0);
         schip.getPoints().add(30.0);
