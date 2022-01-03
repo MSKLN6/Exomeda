@@ -25,4 +25,8 @@ public class BeweegPlayer extends TimerTask{
         playerModel.tick();
         Platform.runLater(playerController::update);
     }
+    
+    public void veranderign(){
+        return //
+    }
 }
