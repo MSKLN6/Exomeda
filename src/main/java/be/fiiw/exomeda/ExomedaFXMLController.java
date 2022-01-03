@@ -39,10 +39,6 @@ public class ExomedaFXMLController {
         playerSchip.getChildren().addAll(playerView);
         update();
         
-        projectileModel = new Projectile();
-        projectileView = new ProjectileView(projectileModel);
-        playerSchip.getChildren().addAll(projectileView);
-        
         playerSchip.setOnKeyPressed(this::beweegPlayer);
         playerSchip.setOnKeyReleased(this::stopBeweegPlayer);
         
