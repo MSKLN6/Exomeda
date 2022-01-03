@@ -63,7 +63,6 @@ public class ExomedaFXMLController {
     
     public void update() {
         playerView.update();
-        projectileView.update();
     }
 
     
