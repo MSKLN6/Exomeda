@@ -78,5 +78,9 @@ public class Player {
                 beweegRechts();
                 break;
         }
+        if(positieX <= 0) //collision bounds toegevoegd
+            positieX = 0;
+        if (positieX >= 760)
+            positieX = 760;
     }
 }
