@@ -39,6 +39,11 @@ public class ExomedaFXMLController {
         playerSchip.getChildren().addAll(playerView);
         update();
         
+        projectileModel = new Projectile(playerModel);
+        projectileView = new ProjectileView(projectileModel);
+        
+        playerSchip.setOnKeyPressed(this::shoot);
+        
         playerSchip.setOnKeyPressed(this::beweegPlayer);
         playerSchip.setOnKeyReleased(this::stopBeweegPlayer);
         
@@ -46,7 +51,7 @@ public class ExomedaFXMLController {
         
         playerView.setFocusTraversable(true);
     }
-
+    
     public void start(){
         BeweegPlayer task = new BeweegPlayer(playerModel, this);
         Timer t = new Timer(true);
@@ -81,4 +86,13 @@ public class ExomedaFXMLController {
         }
         update();
     }    
+    
+    private void shoot(KeyEvent t){
+        switch (t.getCode()) {
+            case UP:
+                projectileModel.schiet();
+                break;
+        }
+        update();
+    }
 }

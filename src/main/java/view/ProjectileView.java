@@ -18,8 +18,8 @@ public class ProjectileView extends Region {
     private Projectile model;
     private AnchorPane projectilePane;
 
-    public ProjectileView(Projectile model) {
-        this.model = model;
+    public ProjectileView(Projectile projectileModel) {
+        model = projectileModel;
         tekenProjectile();
         update();
     }
@@ -40,16 +40,17 @@ public class ProjectileView extends Region {
         projectile.getPoints().add(10.0);
         projectile.getPoints().add(10.0);
         
-        projectile.setFill(Color.WHITE);
+        projectile.setFill(Color.BLUE);
         
     }
     
     public void update(){
-        getChildren().removeAll();
-        projectilePane.setTranslateX(model.getPositieY());
-        getChildren().addAll(projectilePane);
+        getChildren().clear();
+        
+        projectilePane.setTranslateX(this.model.getPositieX());
+        projectilePane.setTranslateY(this.model.getPositieY());
+        
+        getChildren().addAll();
     }
 
-    
-    
 }

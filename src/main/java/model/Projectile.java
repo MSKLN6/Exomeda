@@ -14,14 +14,11 @@ public class Projectile {
     private double positieX;
     private double positieY;
     private ProjectileView projectileView;
+    private Player playerModel;
 
-    public Projectile() {
-        this.positieX = 0;
-        this.positieY = 0;
-    }
-    
-    public void schiet(){
-        projectileView.tekenProjectile();
+    public Projectile(Player playerModel) {
+        this.positieX = playerModel.getPositieX();
+        this.positieY = playerModel.getPositieY();
     }
 
     public double getPositieX() {
@@ -32,7 +29,8 @@ public class Projectile {
         return positieY;
     }
     
-    
-    
+    public void schiet(){
+        projectileView.tekenProjectile();
+    }
     
 }
