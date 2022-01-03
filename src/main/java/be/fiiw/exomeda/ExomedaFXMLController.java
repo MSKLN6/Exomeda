@@ -22,6 +22,9 @@ public class ExomedaFXMLController {
     
     @FXML
     private AnchorPane playerSchip;
+    
+    @FXML
+    private AnchorPane projectilePane;
 
     @FXML
     private AnchorPane spelView;
