@@ -33,4 +33,12 @@ public class Projectile {
         projectileView.tekenProjectile();
     }
     
+    public void tick(){
+        beweegomhoog();
+    }
+    
+    public void beweegomhoog(){
+        positieY --;
+    }
+    
 }

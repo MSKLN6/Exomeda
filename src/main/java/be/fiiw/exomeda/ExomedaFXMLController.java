@@ -19,12 +19,6 @@ public class ExomedaFXMLController {
 
     @FXML
     private URL location;
-    
-    @FXML
-    private AnchorPane playerSchip;
-    
-    @FXML
-    private AnchorPane projectilePane;
 
     @FXML
     private AnchorPane spelView;
@@ -39,30 +33,37 @@ public class ExomedaFXMLController {
         playerModel = new Player();
         playerView = new PlayerView(playerModel);
         
-        playerSchip.getChildren().addAll(playerView);
+        spelView.getChildren().addAll(playerView);
         update();
         
         projectileModel = new Projectile(playerModel);
         projectileView = new ProjectileView(projectileModel);
+        spelView.getChildren().addAll(projectileView);
         
-        playerSchip.setOnKeyPressed(this::shoot);
+        spelView.setOnKeyPressed(this::schietProjectile);
         
-        playerSchip.setOnKeyPressed(this::beweegPlayer);
-        playerSchip.setOnKeyReleased(this::stopBeweegPlayer);
+        spelView.setOnKeyPressed(this::beweegPlayer);
+        spelView.setOnKeyReleased(this::stopBeweegPlayer);
         
         start();
         
         playerView.setFocusTraversable(true);
+        projectileView.setFocusTraversable(true);
     }
     
     public void start(){
         BeweegPlayer task = new BeweegPlayer(playerModel, this);
         Timer t = new Timer(true);
         t.scheduleAtFixedRate(task, 0, 2);
+        
+        BeweegProjectile task2 = new BeweegProjectile(projectileModel, this);
+        Timer t2 = new Timer(true);
+        t2.scheduleAtFixedRate(task2, 0, 2);
     }
     
     public void update() {
         playerView.update();
+        projectileView.update();
     }
 
     
@@ -90,7 +91,7 @@ public class ExomedaFXMLController {
         update();
     }    
     
-    private void shoot(KeyEvent t){
+    private void schietProjectile(KeyEvent t){
         switch (t.getCode()) {
             case UP:
                 projectileModel.schiet();
