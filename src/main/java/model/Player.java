@@ -12,6 +12,7 @@ public class Player {
     private double positieX; // de variabele x positie
     public static double positieY; // De Y positie is een vaste waade
     private PlayerBeweging beweging;
+    public int beweegRechts;
     
     public Player() {
         this(400,500,PlayerBeweging.STIL);
@@ -44,6 +45,10 @@ public class Player {
     
     public void setBeweging(PlayerBeweging beweging){
         this.beweging = beweging;
+    }
+    
+    public PlayerBeweging getBeweging(){
+        return beweging;
     }
 
     /**

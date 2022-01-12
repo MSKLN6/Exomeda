@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import static javafx.application.Application.launch;
 
 /**
  * JavaFX App
@@ -14,10 +15,12 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-
+    public static int WINDOW_WIDTH = 800;
+    public static int WINDOW_HEIGHT = 600;
+    
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("exomedaFXML"), 800, 600);
+        scene = new Scene(loadFXML("exomedaFXML"), WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setScene(scene);
         stage.setTitle("ExomedaGame.exe");
         stage.show();

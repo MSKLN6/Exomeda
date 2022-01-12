@@ -3,12 +3,14 @@ package be.fiiw.exomeda;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Player;
 import model.PlayerBeweging;
 import model.Projectile;
+import view.BackgroundView;
 import view.PlayerView;
 import view.ProjectileView;
 
@@ -19,50 +21,52 @@ public class ExomedaFXMLController {
 
     @FXML
     private URL location;
+    
+    @FXML
+    private AnchorPane playerSchip;
 
     @FXML
     private AnchorPane spelView;
     
     private Player playerModel;
     private PlayerView playerView;
-    private Projectile projectileModel;
-    private ProjectileView projectileView;
+    private BackgroundView background;
+    private Boolean currentFire;
     
     @FXML
     void initialize() {
         playerModel = new Player();
         playerView = new PlayerView(playerModel);
         
-        spelView.getChildren().addAll(playerView);
+        playerSchip.getChildren().addAll(playerView);
         update();
         
-        projectileModel = new Projectile(playerModel);
-        projectileView = new ProjectileView(projectileModel);
-        spelView.getChildren().addAll(projectileView);
+        playerSchip.setOnKeyPressed(this::beweegPlayer);
+        playerSchip.setOnKeyReleased(this::stopBeweegPlayer);
         
-        spelView.setOnKeyPressed(this::schietProjectile);
+        ImageController.preloadImages();
         
-        spelView.setOnKeyPressed(this::beweegPlayer);
-        spelView.setOnKeyReleased(this::stopBeweegPlayer);
+        this.background = new BackgroundView();
+        this.spelView.getChildren().add(this.background);
         
         start();
         
         playerView.setFocusTraversable(true);
-        projectileView.setFocusTraversable(true);
     }
-    
+
     public void start(){
         BeweegPlayer task = new BeweegPlayer(playerModel, this);
         Timer t = new Timer(true);
         t.scheduleAtFixedRate(task, 0, 2);
-        
-        BeweegProjectile task2 = new BeweegProjectile(projectileModel, this);
-        Timer t2 = new Timer(true);
-        t2.scheduleAtFixedRate(task2, 0, 2);
+    }
+    
+    public void updateViews(){
+        this.background.update();
     }
     
     public void update() {
         playerView.update();
+        Platform.runLater( this::updateViews );
     }
 
     
@@ -85,15 +89,6 @@ public class ExomedaFXMLController {
                 break;
             case LEFT:
                 playerModel.setBeweging(PlayerBeweging.STIL);
-                break;
-        }
-        update();
-    }    
-    
-    private void schietProjectile(KeyEvent t){
-        switch (t.getCode()) {
-            case UP:
-                projectileModel.schiet();
                 break;
         }
         update();
