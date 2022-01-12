@@ -11,7 +11,7 @@ import model.PlayerBeweging;
 import model.Projectile;
 import view.PlayerView;
 import view.ProjectileView;
-//////////////////////
+
 public class ExomedaFXMLController {
 
     @FXML
