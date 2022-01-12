@@ -15,6 +15,7 @@ import model.Player;
 public class BeweegPlayer extends TimerTask{
     private Player playerModel;
     private ExomedaFXMLController playerController;
+    /////////////////////////////////////////////
     
     public BeweegPlayer(Player playerModel, ExomedaFXMLController playerController) {
         this.playerModel = playerModel;
